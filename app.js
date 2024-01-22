@@ -27,10 +27,33 @@ function getMyStuffFromOverThere() {
 
 //Parsing the responce
 
-async function getGitHub() {
-  const response = await fetch("https://api.github.com/repos/gabaal/ToDoList");
-  console.log("HTTP Response:", response);
-  const json = await response.json();
-  console.log("JSON Data:", json);
+//using async await
+
+async function fetchGitHubData() {
+  const owner = "gabaal";
+  const repo = "ToDoList";
+
+  const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+  const data = await response.json();
+  console.log("Data:", data);
+  const stargazersCount = data.stargazers_count;
+  document.getElementById("stargazersCount").textContent = stargazersCount;
 }
-getGitHub();
+fetchGitHubData();
+//using then
+
+// const owner = "gabaal";
+// const repo = "ToDoList";
+
+// fetch(`https://api.github.com/repos/${owner}/${repo}`)
+//   .then((response) => response.json())
+//   .then((data) => {
+//     // Data contains information about the repository
+//     const stargazersCount = data.stargazers_count;
+
+//     // Update the HTML content
+//     document.getElementById("stargazersCount").textContent = stargazersCount;
+//   })
+//   .catch((error) => {
+//     console.error("Error fetching data from GitHub API:", error);
+//   });
